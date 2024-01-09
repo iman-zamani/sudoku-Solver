@@ -129,20 +129,71 @@ void MainWindow::initializeGrid()
     setCentralWidget(centralWidget);
 }
 
+bool check_if_sudoku_is_solvble(char arr[9][9]){
+    int save_index_i =0;
+    int save_index_j = 0;
+    int start_i = 0 ,start_j = 0 ;
+    int end_i = 2, end_j = 2;
+    //This is the part for checking the chunk
+    for(int k=0;k<9;k++){
+    bool temp[9] = {false};
+    for(int i=start_i;i<=end_i;i++){
+        for(int j=start_j;j<=end_j;j++){
+            if (arr[i][j] >= '1' && arr[i][j]<='9' && temp[(arr[i][j]-'1')] ==false){
+                temp[(arr[i][j]-'1')] = true;
+            }
+            else if (arr[i][j] >= '1' && arr[i][j]<='9'){
+                return false;
+            }
+        }
+    }
 
+    start_j += 3;
+    end_j += 3;
+    if (end_j>9){
+        start_j = 0;
+        end_j = 2;
+        start_i += 3;
+        end_i += 3;
+    }
+    }
+    //This is the part to check the row
+    for (int k=0;k<9;k++){
+        bool temp[9] = {false};
+        for(int j=0 ;j<x; j++){
+            if (arr[k][j] >= '1' && arr[k][j]<='9' && temp[(arr[k][j]-'1')] == false){
+                temp[(arr[k][j]-'1')] = true;
+            }
+            else if (arr[k][j] >= '1' && arr[k][j]<='9'){
+                return false;
+            }
+        }
+    }
+    //This is the part for checking the column
+    for (int k=0;k<9;k++){
+        bool temp[9] = {false};
+        for(int i=0;i<x;i++){
+            if (arr[i][k] >= '1' && arr[i][k]<='9' && temp[(arr[i][k]-'1')] == false){
+                temp[(arr[i][k]-'1')] = true;
+            }
+            else if (arr[i][k] >= '1' && arr[i][k]<='9'){
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
 std::string get_legal(char arr[9][9],int save_index_i =0,int save_index_j = 0){
     int root = sqrt(x);
     int start_i = (int(save_index_i/root))*root ,start_j = (int(save_index_j/root))*root ;
     int end_i = start_i + (root-1), end_j = start_j + (root-1);
-    bool temp[16] = {false};
+    bool temp[9] = {false};
     //This is the part for checking the chunk
     for(int i=start_i;i<=end_i;i++){
         for(int j=start_j;j<=end_j;j++){
             if (arr[i][j] >= '1' && arr[i][j]<='9'){
                 temp[(arr[i][j]-'1')] = true;
-            }
-            else if (arr[i][j] != '*' && arr[i][j] != 32){
-                temp[(arr[i][j]-'A') + 9] = true;
             }
         }
     }
@@ -151,29 +202,19 @@ std::string get_legal(char arr[9][9],int save_index_i =0,int save_index_j = 0){
         if (arr[save_index_i][j] >= '1' && arr[save_index_i][j]<='9'){
             temp[(arr[save_index_i][j]-'1')] = true;
         }
-        else if (arr[save_index_i][j] != '*' && arr[save_index_i][j] != 32){
-            temp[(arr[save_index_i][j]-'A') + 9] = true;
-        }
     }
     //This is the part for checking the colum
     for(int i=0;i<x;i++){
         if (arr[i][save_index_j] >= '1' && arr[i][save_index_j]<='9'){
             temp[(arr[i][save_index_j]-'1')] = true;
         }
-        else if (arr[i][save_index_j] != '*' && arr[i][save_index_j] != 32){
-            temp[(arr[i][save_index_j]-'A') + 9] = true;
-        }
     }
     // This is what it will return
     std::string ret;
     char t1 ;
     for (int i=0;i<x;i++){
-        if (!temp[i] && i<9){
+        if (!temp[i]){
             t1 =  i + 49 ;
-            ret = ret + t1;
-        }
-        else if (!temp[i]){
-            t1 =  (i-9) + 65;
             ret = ret + t1;
         }
     }
@@ -209,8 +250,19 @@ void MainWindow::solveSudoku()
 {
     char arr[9][9] = {32};
     readInput(arr);
-    finish = false;
-    solve(arr);
+    if (check_if_sudoku_is_solvble(arr)){
+        finish = false;
+        solve(arr);
+    }
+
+        for (int i=0;i<9;i++){
+            for (int j=0;j<9;j++){
+                if (arr[i][j] == '*' ){
+                    arr[i][j] = 32;
+                }
+            }
+        }
+
     displaySolution(arr);
 }
 
@@ -232,7 +284,11 @@ void MainWindow::displaySolution(const char arr[9][9])
 {
     for(int i = 0; i < 9; ++i) {
         for(int j = 0; j < 9; ++j) {
+            if (arr[i][j] != 32)
             cells[i][j]->setText(QString(arr[i][j]));
+            else {
+               cells[i][j]->clear();
+            }
         }
     }
 }
