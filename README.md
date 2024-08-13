@@ -7,7 +7,6 @@ Sudoku Solver is a desktop application developed using C++ and the Qt framework.
 - Interactive grid for entering Sudoku puzzles.
 - "Solve" button to automatically find a solution.
 - "Reset" button to clear the grid and start over.
-- Real-time validation of Sudoku rules as you type.
 
 ## System Requirements
 - Qt 5 or Qt 6
