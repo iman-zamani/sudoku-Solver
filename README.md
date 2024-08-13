@@ -22,7 +22,7 @@ This project uses CMake for building. Follow these steps to compile the applicat
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/sudoku-solver.git
+   git clone https://github.com/imzzzzzz/sudoku-Solver.git
    cd sudoku-solver
    ```
 
