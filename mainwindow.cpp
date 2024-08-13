@@ -5,6 +5,8 @@
 #include <iostream>
 #include <string>
 #include <QFrame>
+#include <cmath>
+
 bool finish = false;
 int x=9;
 
