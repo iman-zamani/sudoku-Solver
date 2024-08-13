@@ -49,4 +49,4 @@ After building the project, you can run the application directly from the build 
 Contributions to Sudoku Solver are welcome! Feel free to fork the repository, make changes, and submit pull requests.
 
 ## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
