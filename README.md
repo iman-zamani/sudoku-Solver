@@ -1,6 +1,5 @@
 # Sudoku Solver
 
-## Description
 Sudoku Solver is a desktop application developed using C++ and the Qt framework. This application allows users to input Sudoku puzzles and solve them using a backtracking algorithm. It features a user-friendly interface for easy interaction with the puzzle.
 
 ![Unsolved Sudoku](images/unsolved.png) ![Solved Sudoku](images/solved.png)
@@ -45,9 +44,6 @@ After building the project, you can run the application directly from the build 
 ```
 ./sudoku
 ```
-
-## Contributing
-Contributions to Sudoku Solver are welcome! Feel free to fork the repository, make changes, and submit pull requests.
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
